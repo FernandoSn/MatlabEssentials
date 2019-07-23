@@ -1,0 +1,9 @@
+{
+	"params": {
+		"chopstyle": "all",
+		"epochwindow": null,
+		"splitwindows": null,
+		"spliteventchan": null,
+		"knowndeadchan": [null]
+	}
+}

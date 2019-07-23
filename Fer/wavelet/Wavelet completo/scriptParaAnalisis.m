@@ -1,0 +1,12 @@
+%cd('C:\Users\Stock\Desktop\FerStock_ acer\ANÁLISIS FER_JUNIO2018\CK');
+%controlWave('Potencia2WaveletsControl');
+%controlCoHWave('CoherenciaWaveletsControl2');
+cd('C:\Users\Stock\Desktop\FerStock_ acer\ANÁLISIS FER_JUNIO2018\K+NPS');
+%postpdWave('Potencia2WaveletsPostPD');
+postpdCoHWave('CoherenciaWaveletsPostPD2');
+%cd('C:\Users\Stock\Desktop\AbsNPS ADQ\wavelet\Wavelet completo\Prior');
+%priorWave('Potencia2WaveletsPrior');
+%priorCoHWave('CoherenciaWaveletsPrior2');
+%cd('C:\Users\Stock\Desktop\AbsNPS ADQ\wavelet\Wavelet completo\Peri PostPD');
+%periWave('Potencia2WaveletsPeri');
+%periCoHWave('CoherenciaWaveletsPeri2');
