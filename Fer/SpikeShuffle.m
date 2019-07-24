@@ -1,5 +1,7 @@
 function [CorrVecShuffle, VecStd] = SpikeShuffle(ReferenceShuff, Target, BinSize, Shuffles,epoch)
 
+error('Deprecated function, please select the folder with the updated fun.' );
+
 NoBins = (epoch / BinSize) .* 2;
 
 CorrVecShuffle = zeros(Shuffles,NoBins);

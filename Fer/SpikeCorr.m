@@ -1,5 +1,8 @@
 function CorrVec = SpikeCorr(Reference, Target, BinSize,epoch)
 
+
+error('Deprecated function, please select the folder with the updated fun.' );
+
 if BinSize > epoch; error('BinSize should be less than 1000ms'); end
 
 
