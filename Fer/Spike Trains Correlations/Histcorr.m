@@ -16,8 +16,8 @@ a = bar(XAxis,CorrVec,'histc');
 %  yticklabels({'-4','-3','2','1','0','1','2'})
 %  yticklabels({'-3','-1','1','3','5','7','9'})
  
-%  ylabel('PfCx Spikes (Z-score)')
-%  xlabel('Time from AON spikes (ms)')
+  ylabel('Target Spikes count')
+  xlabel('Time from reference spikes (ms)')
 %  title('Excitatory AON - PfCx cross-correlation')
 %  title('Inhibitory AON - PfCx cross-correlation')
  
