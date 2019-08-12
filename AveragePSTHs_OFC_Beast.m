@@ -4,7 +4,7 @@ clc
 
 %% For plotting average PSTHs
 % KWIKfiles{1} = 'Z:\expt_sets\major\180511\epochs\180511-011_bank1.result-1.hdf5';
-KWIKfiles{1} = 'Z:\fernando\190611\epochs\190611-001_bank1.result-1.hdf5';
+KWIKfiles{1} = 'Z:\fernando\expt_sets\AON\190704\1907041\epochs\190704-002_bank2.result-2.hdf5';
 
 %% Collect spike rates and pre-odor spike rates for each trial
 for k = 1:length(KWIKfiles)
@@ -45,13 +45,13 @@ for od = 1:length(VOI)
 
 realPST = KDFt>=PST(1) & KDFt<=PST(2);
 
-plot(KDFt(realPST),smooth(mean(Kstack{1}(:,realPST)),100),'color',[.8 .8 .8]) % mo
+plot(KDFt(realPST),smooth(mean(Kstack{1}(:,realPST)),1),'color',[.8 .8 .8]) % mo
 hold on
-plot(KDFt(realPST),smooth(mean(Kstack{od}(:,realPST)),100),'color',[.1 .1 .6]) % mo
+plot(KDFt(realPST),smooth(mean(Kstack{od}(:,realPST)),1),'color',[.1 .1 .6]) % mo
 
 axis square
 box off
-% ylim([0 15])
+ ylim([0 15])
 xlim(PST)
 end
 
