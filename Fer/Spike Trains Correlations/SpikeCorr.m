@@ -34,6 +34,6 @@ for ii = 1:length(Reference)
     
 end
 
-  CorrVec = CorrVec./length(Reference);
+  %CorrVec = CorrVec./length(Reference);
  
-  %Histcorr(CorrVec,BinSize*1000,epoch)
+  Histcorr(CorrVec,BinSize*1000,epoch)
