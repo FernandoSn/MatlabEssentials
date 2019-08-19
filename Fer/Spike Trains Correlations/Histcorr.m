@@ -1,10 +1,10 @@
 function Histcorr(CorrVec,BinSize,epoch)
 
 XAxis = -epoch:BinSize:epoch-BinSize;
-figure
+%figure
 a = bar(XAxis,CorrVec,'histc');
 
-% set(a,'FaceColor','r','EdgeColor','r');
+ set(a,'FaceColor','k','EdgeColor','k');
 % set(a,'FaceColor',[48/255,88/255,230/255],'EdgeColor',[48/255,88/255,230/255]);
 
 % hold on
