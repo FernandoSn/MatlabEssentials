@@ -1,4 +1,4 @@
-function WriteBinForCrossCorrC(efd,SpikesRef,SpikesTar,filename)
+function WriteBinForCrossCorrCpp(efd,SpikesRef,SpikesTar,filename)
 
 archivos=dir;
 
