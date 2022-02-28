@@ -182,6 +182,14 @@ if ismember('P',Subplots)
     if strcmp(P.RealBins,'off')
         [KDF, ~, KDFt, KDFe] = KDFmaker(Raster(VOI,COIIndex), PST, KernelSize,TrialsList{1});
         
+        %
+        PruebaRasterBR = Raster(VOI,COIIndex);
+        PruebaTrialListBR = TrialsList{1};
+        BRPST = PST;
+        BRKernelSize = KernelSize;
+        %save('BlackRock.mat','PruebaRasterBR','PruebaTrialListBR','BRPST','BRKernelSize');
+        %
+        
         realPST = KDFt>=PST(1) & KDFt<=PST(2);
         % for PSTH plotting we want the ylimit to be the same across all valves and
         % for it to be a nice round number. for 1:10 it will round to nearest

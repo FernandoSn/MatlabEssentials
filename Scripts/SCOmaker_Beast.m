@@ -34,12 +34,12 @@ function [Scores,efd] = SCOmaker_Beast(KWIKfile,TrialSets)
 %% Here we are gathering information.
 % Basically spike counts relative to valve openings and when experimental events occur.
 [efd] = EFDmaker_Beast(KWIKfile,'bhv');
-
+%efd = KWIKfile;
 % Also if the user doesn't specify any trials to analyze in particular we
 % will find the minimum number of trials for a single valve and use those.
 mintrials = min(cellfun(@length,efd.ValveTimes.FVSwitchTimesOn));
 if nargin < 2
-    TrialSets{1} = 1:9;
+    TrialSets{1} = 1:15;
 end
 
 %% Here we will take any measure of the response and give indications of

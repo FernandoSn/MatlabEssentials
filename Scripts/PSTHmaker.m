@@ -9,11 +9,21 @@ function [PSTH, PSTHtrials, PSTHt] = PSTHmaker(Raster, PST, BinSize, Trials)
                     Trials = 1:length(Raster{V,U});
                 end
                 for T = 1:length(Trials)
-                    %                    Raster{V,U}{Trials(T)}(Raster{V,U}{Trials(T)}>-.001 & Raster{V,U}{Trials(T)}<.001) = [];
+                    
+                    %Raster{V,U}{Trials(T)}(Raster{V,U}{Trials(T)}>-.001 & Raster{V,U}{Trials(T)}<.001) = [];
                     
                     PSTHtrials{V,U,T} = histc(Raster{V,U}{Trials(T)},Edges);
                     PSTHtrials{V,U,T} = PSTHtrials{V,U,T}(1:end-1);
                 end
+                
+%                 if isempty(PSTHtrials{V,U,T})
+%                    PSTHtrials{V,U,T} = zeros(1,length(Edges)-1);
+%                 end
+                
+%                 if U == 26
+%                    aasd =2; 
+%                 end
+                
                 PSTH{V,U} = sum(cat(1,PSTHtrials{V,U,:}),1);
                 PSTH{V,U} = PSTH{V,U}/BinSize/length(Trials);
 %             end

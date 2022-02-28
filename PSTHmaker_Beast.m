@@ -9,10 +9,14 @@ function [PSTH, PSTHtrials, PSTHt] = PSTHmaker_Beast(Raster, PST, BinSize, Trial
                     Trials = 1:length(Raster{V,C,U});
                 end
                    for T = 1:length(Trials)
-                       Raster{V,C,U}{Trials(T)}(Raster{V,C,U}{Trials(T)}>-.005 & Raster{V,C,U}{Trials(T)}<.005) = [];
+                       %Raster{V,C,U}{Trials(T)}(Raster{V,C,U}{Trials(T)}>-.001 & Raster{V,C,U}{Trials(T)}<.001) = [];
 
                        PSTHtrials{V,C,U,T} = histc(Raster{V,C,U}{Trials(T)},Edges);
                        PSTHtrials{V,C,U,T} = PSTHtrials{V,C,U,T}(1:end-1);
+                       
+                       if isempty(PSTHtrials{V,C,U,T})
+                           PSTHtrials{V,C,U,T} = zeros(1,length(Edges)-1);
+                       end
                    end
                    PSTH{V,C,U} = sum(cat(1,PSTHtrials{V,C,U,:}));
             end
