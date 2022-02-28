@@ -50,5 +50,6 @@ for s = vScale  %En este loop se realiza la transformada de Wavelets en el espac
 end
 
     w = w(:,1:originalLength);
+    %w = abs(w).^2;
 
-plotWaveletSpectrum(abs(w).^2,freq,Fs);  %Activar si se desea graficar.
+%plotWaveletSpectrum(abs(w).^2,freq,Fs);  %Activar si se desea graficar.

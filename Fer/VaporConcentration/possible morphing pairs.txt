@@ -1,0 +1,34 @@
+geraniol, 0.0063
+etbu, 0.745
+cinnamaldehyde, 0.0136
+acetophenone, 0.1714
+r-octanol, 0.0889
+r-carvone, 0.0455
+octanal, 0.168
+ettig, 0.3679
+isac, 0.3963
+limonene, 0.0526
+undecanal, 0.0054
+hexanal, 1.0422
+val, 3.1878
+2-hex, 1.3378
+pinene, 0.1209
+ethyl decanoate, 0.0014
+pentanoic acid, 0.0885
+ethyl hexanoate, 0.0868
+vanillin, 0.0022669
+beta-ionone, 0.0019
+
+acetophenone - pinene
+limonene  - carvone
+
+cinnamaldehyde - gammaterpinene
+
+
+undecanal - geraniol
+ethyl hexanoate - roctanol 
+acetophenone - octanal
+
+hexanal - etbu
+ettig - isac
+pentanoic acid - ethyl hexanoate

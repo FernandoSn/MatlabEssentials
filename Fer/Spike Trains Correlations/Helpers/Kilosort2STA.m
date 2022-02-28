@@ -1,8 +1,8 @@
-function Spikes = Kilosort2STA(s,varargin)
+function Spikes = Kilosort2STA(s,filename,varargin)
 
 
 
-%%Takes the struct returned by loadKSdirGoodUnits (modified function
+%%S is the struct returned by loadKSdirGoodUnits (modified function
 %%of the Spikes Steinmetz library for handling phy2 output).
 
 %%Formats the data in the same way of Bolding's functions to handle
@@ -11,6 +11,20 @@ function Spikes = Kilosort2STA(s,varargin)
 
 %%the second section writes the data to a .dat file taking the same units
 %%as reference and as target.
+
+if ~isempty(varargin)
+    
+    TimeRange = varargin{1};
+    
+    Idx = (s.st > TimeRange(1) & s.st < TimeRange(2));
+    
+    s.st = s.st(Idx);
+    s.ss = s.ss(Idx);
+    s.spikeTemplates = s.spikeTemplates(Idx);
+    s.clu = s.clu(Idx);
+    s.tempScalingAmps = s.tempScalingAmps(Idx);
+
+end
 
 NoUnits = size(s.cids,2);
 
@@ -24,14 +38,6 @@ for ii = 1:NoUnits
 end
 Spikes.cids = s.cids;
 Spikes.tsec = sscarray;
-
-if ~isempty(varargin)
-    
-    filename = varargin{1};
-else
-    
-    return;
-end
 
 SpikesRef = Spikes;
 SpikesTar = Spikes;

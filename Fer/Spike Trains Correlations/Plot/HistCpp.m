@@ -21,8 +21,8 @@ plot(XAxis,ones(1,Interval) * Matrix(Index,First+1),'Color',[168/255, 50/255, 83
 
 MaxVal = max([MaxVal,Matrix(Index,First+1)]);
 
-YL = ['Target Spikes Count (Unit ', num2str(Matrix(Index,3)), ')'];
-XL = ['Time from Reference Spikes in ms (Unit ', num2str(Matrix(Index,2)), ')'];
+YL = ['Target Spikes Count (Unit ', num2str(Matrix(Index,193)), ')'];
+XL = ['Time from Reference Spikes in ms (Unit ', num2str(Matrix(Index,191)), ')'];
 
 % YL = [' (Unit ', num2str(Matrix(Index,3)), ')'];
 % XL = [' (Unit ', num2str(Matrix(Index,2)), ')'];
