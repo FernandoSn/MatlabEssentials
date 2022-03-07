@@ -11,7 +11,7 @@
 %for NI board
 %[PREXmatFV,PREXmat1sPrior,PREXmatPreFV] = PostBold(PREX*2000, CeventsNI);
 
-NPXSpikes.SpikeTimes = NPX_GetBeastCompatSpikeTimes(NPXSpikes);
+%NPXSpikes.SpikeTimes = NPX_GetBeastCompatSpikeTimes(NPXSpikes);
 
 
 
@@ -52,7 +52,7 @@ plotparams.VOI = 1:length(Odors);
 NPXSpikes.ValveTimes = NPX_GetBeastCompatValveTimes(PREXOdorTimes);
 %NPXSpikes.ValveTimesPr = NPX_GetBeastCompatValveTimes(PREXOdorTimesPr);
 
-Raster = VSRasterAlign_Beast(NPXSpikes.ValveTimes,NPXSpikes.SpikeTimes);
+Raster = NPX_RasterAlign(NPXSpikes.ValveTimes,NPXSpikes.SpikeTimes);
 %RasterPr = VSRasterAlign_Beast(NPXSpikes.ValveTimesPr,NPXSpikes.SpikeTimes);
 
 

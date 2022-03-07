@@ -22,7 +22,7 @@ valves = 1:size(Raster,1);
 
 
 %[PSTHTA, PSTHtrials, PSTHt] = PSTHmaker(Raster(valves,units), PST, BinSize, trials);
-[PSTHTA, PSTHtrials, PSTHt] = PSTHmaker_Beast(Raster, PST, BinSize, trials);
+[PSTHTA, PSTHtrials, PSTHt] = NPX_PSTHmaker(Raster, PST, BinSize, trials);
 
 PSTHTA = reshape(PSTHTA,[size(PSTHTA,1),size(PSTHTA,3)]);
 PSTHtrials = reshape(PSTHtrials,[size(PSTHtrials,1),size(PSTHtrials,3),size(PSTHtrials,4)]);

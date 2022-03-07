@@ -1,4 +1,4 @@
-function [PSTHtrials] = NPX_PSTHmaker(Raster, PSTs, Trials,isLat)
+function [PSTHtrials] = NPX_PSTHmakerDeprecated(Raster, PSTs, Trials,isLat)
 
 %isLat = true for latencies
     if isLat

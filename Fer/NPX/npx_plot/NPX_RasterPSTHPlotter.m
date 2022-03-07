@@ -278,7 +278,7 @@ if ismember('P',Subplots)
         KDFstack = cell2mat(KDF') +cell2mat(KDFe');
         
     else
-        [KDF, ~, KDFt] = PSTHmaker(Raster(VOI,COIIndex), PST, KernelSize,TrialsList{1});
+        [KDF, ~, KDFt] = NPX_PSTHmaker(Raster(VOI,COIIndex), PST, KernelSize,TrialsList{1});
         realPST = KDFt>=PST(1) & KDFt<=PST(2);
 
         KDFe = KDF;
