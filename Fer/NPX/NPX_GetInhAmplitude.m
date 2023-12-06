@@ -1,4 +1,4 @@
-function [InhAmplitude,PREXCounts] = NPX_GetInhAmplitude(ValveTimes, Resp,InhTimes, PREX, POSTX, Fs,PST,trials)
+function [InhAmplitude,PREXCounts,mInhAmp,mPREXc] = NPX_GetInhAmplitude(ValveTimes, Resp,InhTimes, PREX, POSTX, Fs,PST,trials)
 
 PreWnd = 5;
 %bugs = [];
@@ -89,4 +89,13 @@ for Valve = 1:size(ValveTimes.PREXTimes,1)
 
     end
     %end
+end
+
+mInhAmp = zeros(1,size(ValveTimes.PREXTimes,1));
+mPREXc = zeros(1,size(ValveTimes.PREXTimes,1));
+
+for ii = 1:size(ValveTimes.PREXTimes,1)
+   
+    mInhAmp(ii) = mean(InhAmplitude(((ii-1)*length(trials))+1:ii*length(trials)));
+    mPREXc(ii) = mean(PREXCounts(((ii-1)*length(trials))+1:ii*length(trials)));
 end

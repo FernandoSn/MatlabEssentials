@@ -1,4 +1,4 @@
-function [PSTHMat,SortedIdx,t,PeakRatePos,PeakRate] = NPX_GetPSTHheatmap(PSTHstruct,Valve,PlotOpts)
+function [PSTHMat,SortedIdx,t,PeakRatePos,PeakRate] = NPX_GetPSTHheatmapOld(PSTHstruct,Valve,PlotOpts)
 
 %PSTHstrut, struct returned by NPX_RasterPSTHPlotter
 

@@ -30,8 +30,9 @@ if strcmp(method, 'pca')
 %     traindata = traindata';
     
     %NumPC = 2;
-    %traindata  = zscore(traindata);
-    [~,score,~,~,explained] = pca(traindata);
+    traindata  = zscore(traindata);
+    %[~,score,~,~,explained] = pca(traindata);
+    [~,score,~,~] = pca(traindata);
     
 %     score = score';
 %     

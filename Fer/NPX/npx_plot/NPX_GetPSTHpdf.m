@@ -6,7 +6,11 @@ if nargin < 4
     plotparams.OnlyData = false;
     plotparams.VOI = 1:size(Raster,1);
     %plotparams.PSTHparams.PST = [-.3,0.6];
-    plotparams.PSTHparams.PST = [-1,2];
+    plotparams.PSTHparams.PST = [-1,3];
+    %plotparams.PSTHparams.KernelSize = 0.0040;
+    
+    
+%     plotparams.TrialVec = 1:9;
     
 end
 

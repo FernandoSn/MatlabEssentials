@@ -9,6 +9,8 @@ FsNPX = 30000;
 teventsMCC = eventsMCC(StMCC==-1 | StMCC==1); %temp
 teventsNPX = eventsNPX(StNPX==-1 | StNPX==1);
 
+teventsNPX = teventsNPX(1:length(teventsMCC)); %This is to avoid the problem of fewer MCC events due to sound ttls
+
 c = polyfit(teventsMCC,teventsMCC - teventsNPX/(FsNPX/FsMCC),1);
 
 coeff = round(1/c(1));
@@ -27,7 +29,8 @@ end
 eventsMCC(LowB < eventsMCC) = eventsMCC(LowB < eventsMCC) - Count;
 
 
-offset = round(mean(eventsMCC(StMCC==-1 | StMCC==1) - eventsNPX(StNPX==-1 | StNPX==1)/(FsNPX/FsMCC)));
+%offset = round(mean(eventsMCC(StMCC==-1 | StMCC==1) - eventsNPX(StNPX==-1 | StNPX==1)/(FsNPX/FsMCC)));
+offset = round(mean(eventsMCC(StMCC==-1 | StMCC==1) - teventsNPX/(FsNPX/FsMCC)));
 
 eventsMCC = eventsMCC - offset;
 

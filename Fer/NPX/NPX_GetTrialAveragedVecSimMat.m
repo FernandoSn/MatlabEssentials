@@ -8,13 +8,14 @@ badcell = any(isinf(td) | isnan(td));
 %fprintf('Badcells: %d \n', sum(badcell))
 td(:,badcell) = [];
 
-la = unique(label,'stable');
+%la = unique(label,'stable');
+la = unique(label,'sorted');
 ta = zeros(length(la), size(td,2));
 for ii = 1:length(la)
     ta(ii,:) = nanmean(td(label == la(ii),:),1);
 end
 
-% ta = zscore(ta);
+%  ta = zscore(ta);
 % td = zscore(td);
 
 TASimMat = NPX_GetSimMatrix(ta, metric);

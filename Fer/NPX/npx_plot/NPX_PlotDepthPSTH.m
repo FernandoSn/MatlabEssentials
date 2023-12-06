@@ -13,6 +13,7 @@ depthBinSize = 10; % in units of the channel coordinates, in this case µm
 timeBinSize = 0.01; % seconds
 %bslWin = [-0.2 -0.05]; % window in which to compute "baseline" rates for normalization
 bslWin = [window(1) -0.05];
+%bslWin = [window(1) 0];
 %bslWin = [];
 psthType = 'norm'; % show the normalized version
 eventName = 'stimulus onset'; % for figure labeling

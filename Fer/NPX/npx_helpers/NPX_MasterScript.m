@@ -1,32 +1,62 @@
 
 
-%[InhTimes,PREX,POSTX,RRR,BbyB] = BoldingResp(CResp,2000,timeResp,CeventsMCCt(StMCC == -1)/2000,CeventsMCCt(StMCC == 1)/2000);
-[InhTimes,PREX,POSTX,RRR,BbyB] = BoldingResp(CResp,2000,timeResp);
+[InhTimes,PREX,POSTX,RRR,BbyB] = BoldingResp(CResp,2000,timeResp,CeventsMCCt(StMCC == -1)/2000,CeventsMCCt(StMCC == 1)/2000);
+
+
+%%chronic large rec
+% OlfacMat = c_OlfacMat(:,1:3);
+% StMCC = c_StMCC;
+% PREX = [];
+% endtimes = [0,endtimes];
+% for ii = 1:length(endtimes)-1
+%     
+%    idx = (1+sum(endtimes(1:ii))*60*2000):(sum(endtimes(1:ii+1))*60*2000);
+%    %[~,tempprex] = BoldingResp(CResp(idx),2000,(1:length(CResp(idx))) / 2000);
+%    [~,tempprex] = BoldingResp(CResp(idx),2000,timeResp(idx));
+%    PREX = [PREX,tempprex+sum(endtimes(1:ii))*60];
+%     
+% end
+
+
+%%%%%
+
+%%%%%%%%%%%%To Get speific trials
+%idx = (OM(:,6)==2 & OM(:,7)==2) | (OM(:,6)==3 & OM(:,7)==3);
+%idx = OM(:,7)~=4 & OM(:,7)~=5;
+%idx = OM(:,7) == 0;
+idx = true(size(OM,1),1);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FVevents = CeventsMCCt(StMCC == -1);
+
 
 %for NI board
 %[InhTimes,PREX,POSTX,RRR,BbyB] = BoldingResp(CResp,2000,timeResp,CeventsNI/2000,CeventsNI2(2:2:end)/2000);
 
-[PREXmatFV,PREXmat1sPrior,PREXmatPreFV] = PostBold(PREX*2000, CeventsMCCt(StMCC == -1));
+%[PREXmatFV,PREXmat1sPrior,PREXmatPreFV] = PostBold(round(PREX*2000),FVevents(idx));
+PREXmatFV = FVevents(idx);
 %PREXmatFV = CeventsMCCt(StMCC == -1);
 %for NI board
 %[PREXmatFV,PREXmat1sPrior,PREXmatPreFV] = PostBold(PREX*2000, CeventsNI);
 
 %NPXSpikes.SpikeTimes = NPX_GetBeastCompatSpikeTimes(NPXSpikes);
+NPXSpikes.SpikeTimes = FakeSpikes(NPXSpikes.SpikeTimes);
 
 
 
-PREXmatPreFV = PREXmat1sPrior; %Comment this out if you want the inh before fv opening.
+%PREXmatPreFV = PREXmat1sPrior; %Comment this out if you want the inh before fv opening.
 
 
 plotparams.PSTH.Axes = 'on';
 plotparams.PSTHparams.Axes = 'on';
 plotparams.OnlyData = true;
+plotparams.PSTHparams.PST = [-1,3];
+plotparams.TrialVec = 1:80;
 
 % plotparams.NPXDepthIdx = [L3idx(1),L3idx(end)];
 %plotparams.NPXDepthRange = [0, 2000];
 
-TimeInterval = PREXmatFV;
-TimeIntervalPr = PREXmatPreFV;
+%TimeInterval = PREXmatFV;
+%TimeIntervalPr = PREXmatPreFV;
 
 %IMPORTANT;
 %if you use this remember to calculate a RasterPr with PREXmat1sPrior
@@ -39,7 +69,7 @@ TimeIntervalPr = PREXmatPreFV;
 
 %%%%%%This depends on the structure of the experiment. Cannot be auto.
 
-[PREXOdorTimes,Odors] = NPX_PREX2Odor(PREXmatFV,OlfacMat,1);
+[PREXOdorTimes,Odors] = NPX_PREX2Odor(PREXmatFV,OlfacMat(idx,:),1);
 %[PREXOdorTimes,Odors] = NPX_PREX2Odor(PREXmatFV(271:end,:),OlfacMat(271:end,:),1);
 %[PREXOdorTimes,Odors] = NPX_PREX2Odor(CeventsMCCt(StMCC == -1),OlfacMat,1);
 %[PREXOdorTimesPr] = NPX_PREX2Odor(PREXmatPreFV,OlfacMat,1);
@@ -205,7 +235,7 @@ PSTHstruct = NPX_RasterPSTHPlotter(Raster,NPXSpikes.SpikeTimes,plotparams);
 % Raster2PREXv = VSRasterAlign_Beast(prov2,PREXtimes);
 % Raster2PREXr = VSRasterAlign_Beast(NPXSpikes.ValveTimes2,PREXtimes);
 
-clear OdorVec1 IdxMorph TimeInterval TimeIntervalPr eventsforresp prov1 prov2 prov
+clear OdorVec1 IdxMorph TimeInterval TimeIntervalPr eventsforresp prov1 prov2 prov tempprex
 
 % RasterLFP2 = NPX_LFPRasterAlign('structure.oebin',NPXSpikes.ValveTimes2);
 % 
@@ -304,6 +334,39 @@ clear a AveLFPMat
 
 
 
-
-
-
+% NPXSpikes = NPXSpikesBulb;
+% Bank = 2;
+% CResp = CMCCDataC{Bank}(1,:);
+% CeventsMCCt = CeventsMCC(:,Bank);
+% timeResp = (1:length(CResp)) / 2000;
+% NPX_MasterScript
+% NPX_GetPSTHpdf(Raster,NPXSpikes.SpikeTimes,'Bulb');
+% FVON = (cell2mat((NPX_PREX2Odor(CeventsMCCt(StMCC == -1),OlfacMat,1))')')./2000;
+% FVOff = (cell2mat((NPX_PREX2Odor(CeventsMCCt(StMCC == 1),OlfacMat,1))')')./2000;
+% [RasterPh,FVphase] = NPX_RasterPhaseAlign(NPXSpikes.ValveTimes,NPXSpikes.SpikeTimes,PREX,{FVON,FVOff});
+% plotparams.OnlyData = false;
+% plotparams.PSTHparams.PST = [-3,9];
+% plotparams.R.Shading = 'on';
+% plotparams.R.FVtimes = FVphase;
+% plotparams.PSTHparams.PST = [-3,9];
+% plotparams.PSTHparams.KernelSize = 0.08;
+% NPX_GetPSTHpdf(RasterPh,[],'PhaseBulb',plotparams);
+% clear;
+% load('pPCXNPX38D22.mat')
+% NPXSpikes = NPXSpikespPCx;
+% Bank = 1;
+% CResp = CMCCDataC{Bank}(1,:);
+% CeventsMCCt = CeventsMCC(:,Bank);
+% timeResp = (1:length(CResp)) / 2000;
+% NPX_MasterScript
+% NPX_GetPSTHpdf(Raster,NPXSpikes.SpikeTimes,'pPCx');
+% FVON = (cell2mat((NPX_PREX2Odor(CeventsMCCt(StMCC == -1),OlfacMat,1))')')./2000;
+% FVOff = (cell2mat((NPX_PREX2Odor(CeventsMCCt(StMCC == 1),OlfacMat,1))')')./2000;
+% [RasterPh,FVphase] = NPX_RasterPhaseAlign(NPXSpikes.ValveTimes,NPXSpikes.SpikeTimes,PREX,{FVON,FVOff});
+% plotparams.OnlyData = false;
+% plotparams.PSTHparams.PST = [-3,9];
+% plotparams.R.Shading = 'on';
+% plotparams.R.FVtimes = FVphase;
+% plotparams.PSTHparams.PST = [-3,9];
+% plotparams.PSTHparams.KernelSize = 0.08;
+% NPX_GetPSTHpdf(RasterPh,[],'PhasepPCx',plotparams);

@@ -19,20 +19,6 @@ try
   [pathstr, name, ext] = fileparts(filename);
   fid = fopen(filename, 'r');
   
-%   if nargin < 3
-%     outputFilename  = [name '_CAR' ext];
-%     mdTraceFilename = [name '_medianTrace.mat'];
-%   else
-%     outputFilename  = [outputDir filesep name '_CAR' ext];
-%     mdTraceFilename = [outputDir filesep name '_medianTrace.mat'];
-%   end
-  
-%   if nargin > 2
-%     outputFilename  = [name '_wh' ext];
-%   else
-%     outputFilename  = [name '_CAR' ext];
-%   end
-  
   outputFilename  = [name '_CAR' ext];
   
   mdTraceFilename = [name '_medianTrace.mat'];
@@ -63,14 +49,15 @@ try
 %       medianTrace((chunkInd-1)*chunkSize+1:(chunkInd-1)*chunkSize+numel(tm)) = tm;
       
       dat = bsxfun(@minus, dat, median(dat,2)); % subtract median of each channel
-      %tm = median(dat,1);
-      %dat = bsxfun(@minus, dat, tm); % subtract median of each time point
+      tm = median(dat,1);
+      dat = bsxfun(@minus, dat, tm); % subtract median of each time point
       
 %       if nargin > 2
 %         dat = int16((double(dat)')*Wrot); %whitening.
 %       end
-      
+      %tic;
       fwrite(fidOut, dat, 'int16');
+      %toc
       %medianTrace((chunkInd-1)*chunkSize+1:(chunkInd-1)*chunkSize+numel(tm)) = tm;
       
     else

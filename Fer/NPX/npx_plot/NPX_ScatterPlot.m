@@ -81,10 +81,10 @@ for ii = 1:size(score,1)
     
     if Dim == 2
         
-       scatter(score(ii,1),score(ii,2),'MarkerFaceColor',color,'MarkerEdgeColor',color,'MarkerFaceAlpha',alpha,'MarkerEdgeAlpha',alpha)
+       scatter(score(ii,1),score(ii,2),'MarkerFaceColor',color,'MarkerEdgeColor',color,'MarkerFaceAlpha',alpha,'MarkerEdgeAlpha',alpha,'SizeData',50)
        
     elseif Dim == 3
-       scatter3(score(ii,1),score(ii,2),score(ii,3),'MarkerFaceColor',color,'MarkerEdgeColor',color,'MarkerFaceAlpha',alpha,'MarkerEdgeAlpha',alpha)
+       scatter3(score(ii,1),score(ii,2),score(ii,3),'MarkerFaceColor',color,'MarkerEdgeColor',color,'MarkerFaceAlpha',alpha,'MarkerEdgeAlpha',alpha,'SizeData',50)
     %     scatter3(mean(score(ini:ini+Trials-1,1))...
     %         ,mean(score(ini:ini+Trials-1,2)),mean(score(ini:ini+Trials-1,3))) 
         

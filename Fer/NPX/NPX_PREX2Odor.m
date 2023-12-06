@@ -24,9 +24,11 @@ Odors = unique(OlfacMat(:,2))';
 
 PREXOdorTimes = cell(length(Odors),1);
 
+
 for ii = 1:length(Odors)
-   
+
     PREXOdorTimes{ii} = PREXmat(Odors(ii) == OlfacMat(:,2),RespNum);
-    
+
 end
+
 

@@ -22,7 +22,8 @@ end
 Units = 1:size(SpikeTimes.tsec,1);    
 
 
-cycleVec = -5:15; %5 cycles before odor onset and 20 cycles after odor onset
+% cycleVec = -5:15; %5 cycles before odor onset and 20 cycles after odor onset
+cycleVec = 0:4; %5 cycles before odor onset and 20 cycles after odor onset
 
 for Unit = Units
     st = SpikeTimes.tsec{Unit};

@@ -5,6 +5,7 @@ function PlotSimMatsScript5(td,ltd,NamePDF)
 n = 1; %Fig Counter
 
 BlockSize = 49;
+%BlockSize = 24;
 %BlockSize = 14;
 
 

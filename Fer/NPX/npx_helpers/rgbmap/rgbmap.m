@@ -72,17 +72,23 @@ assert(exist('rgb','file')==2,'Cannot find the rgb function. Make sure Matlab kn
 
 levels = 256; % default 
 for k = 1:length(varargin)
-    if isnumeric(varargin{k})
-        levels = varargin{k};
-        varargin(k)=[]; 
-    end
+%     if isnumeric(varargin{k})
+%         levels = varargin{k};
+%         varargin(k)=[]; 
+%     end
 end
 
 for k = 1:length(varargin)
-    try
-        cp(k,:) = rgb(varargin{k}); 
-    catch err
-        error('MATLAB:rgbmap:rgb',['Cannot find an rgb value for the color ',varargin{k},'.'])
+    
+    if ischar(varargin{k})
+        try
+            cp(k,:) = rgb(varargin{k}); 
+        catch err
+            error('MATLAB:rgbmap:rgb',['Cannot find an rgb value for the color ',varargin{k},'.'])
+        end
+    else
+       
+        cp(k,:) = varargin{k}; 
     end
 end
 

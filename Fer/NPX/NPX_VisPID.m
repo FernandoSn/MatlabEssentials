@@ -38,7 +38,7 @@ for odor = 1:length(Odors)
       
       
       if strcmp(Source,'front')
-        trace = CPID(PIDOdorTimes{odor}(trial):PIDOdorTimes{odor}(trial) + Fs*Wnd);
+        trace = CPID(PIDOdorTimes{odor}(trial)-Fs:PIDOdorTimes{odor}(trial) + Fs*Wnd);
         %trace = trace - mean(trace);
         trace = trace - trace(1);
       elseif strcmp(Source,'back')
@@ -67,5 +67,5 @@ end
 for ii = 1:length(Odors)
     subplot(1,length(Odors),ii);
     ylim([min(cell2mat(PIDdata),[],'all')-200, max(cell2mat(PIDdata),[],'all')+200])
-    %ylim([-200 500])
+    %ylim([-200 1500])
 end

@@ -11,6 +11,11 @@ set(get(gca, 'Title'), 'FontSize', 20);
 
 ch = get(gca, 'Children');
 
+set(gca,'TickDir','out');
+box off
+
+% set(gca,'TickLength',[0 0]) %Use to remove ticks but keep labels
+
 for c = 1:length(ch)
     thisChild = ch(c);
     if strcmp('line', get(thisChild, 'Type')) 

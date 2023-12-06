@@ -1,4 +1,4 @@
-function Spikes = Kilosort2STA(s,filename,varargin)
+function Spikes = Kilosort2STA(NPXSpikes,filename,varargin)
 
 
 
@@ -16,27 +16,27 @@ if ~isempty(varargin)
     
     TimeRange = varargin{1};
     
-    Idx = (s.st > TimeRange(1) & s.st < TimeRange(2));
+    Idx = (NPXSpikes.st > TimeRange(1) & NPXSpikes.st < TimeRange(2));
     
-    s.st = s.st(Idx);
-    s.ss = s.ss(Idx);
-    s.spikeTemplates = s.spikeTemplates(Idx);
-    s.clu = s.clu(Idx);
-    s.tempScalingAmps = s.tempScalingAmps(Idx);
+    NPXSpikes.st = NPXSpikes.st(Idx);
+    NPXSpikes.ss = NPXSpikes.ss(Idx);
+    NPXSpikes.spikeTemplates = NPXSpikes.spikeTemplates(Idx);
+    NPXSpikes.clu = NPXSpikes.clu(Idx);
+    NPXSpikes.tempScalingAmps = NPXSpikes.tempScalingAmps(Idx);
 
 end
 
-NoUnits = size(s.cids,2);
+NoUnits = size(NPXSpikes.cids,2);
 
 sscarray = cell(NoUnits,1);
 
 for ii = 1:NoUnits
     
-    sscarray{ii} = uint32(s.ss(s.clu == s.cids(ii)));
+    sscarray{ii} = uint32(NPXSpikes.ss(NPXSpikes.clu == NPXSpikes.cids(ii)));
 %     Spikes.cids(ii) = s.cids(ii);
     
 end
-Spikes.cids = s.cids;
+Spikes.cids = NPXSpikes.cids;
 Spikes.tsec = sscarray;
 
 SpikesRef = Spikes;
@@ -48,7 +48,7 @@ archivos=dir;
 
 for aa=1:size(archivos,1)
     if strcmp(archivos(aa).name,[filename,'.dat'])
-        error('Archivo existente, selecciona otro nombre');
+        error('Existing file, use other name');
     end
 end
 

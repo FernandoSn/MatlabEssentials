@@ -1,6 +1,6 @@
-function [ltd,td,tatd,n_bins] = NPX_GetTD(Raster,PST,BinSize,Trials)
+function [ltd,td,tatd,n_bins, PSTHt] = NPX_GetTD(Raster,PST,BinSize,Trials,isSmooth,kernelSize)
 
-if nargin<4
+if isempty(Trials)
     
     [~, PSTHtrials, PSTHt] = NPX_PSTHmaker(Raster, PST, BinSize);
     
@@ -67,6 +67,29 @@ td = td(idx,:);
 ltd = ltd(idx);
 stimuli = unique(ltd);
 
+
+if nargin > 4
+    
+    if isSmooth
+    
+        tt = (PST(end) -PST(1));
+        kernel = gaussmf(linspace(-tt,tt,n_bins),[kernelSize 0])';
+        kernel = kernel ./ sum(kernel);
+
+        td = td';
+
+        for ii = 1:n_bins:numel(td)
+
+            td(ii:ii+n_bins-1) = conv(td(ii:ii+n_bins-1),kernel,'same');
+
+        end
+
+        td = td';
+    
+    end
+    
+end
+%td = zscore(td);
 tatd = zeros( numel(stimuli) , size(td,2));
 for stimulus = 1:size(tatd,1)
     
@@ -74,5 +97,5 @@ for stimulus = 1:size(tatd,1)
     
 end
 
-end
 
+end

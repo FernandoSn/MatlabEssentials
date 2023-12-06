@@ -64,6 +64,9 @@ for ii = 1:length(fnames)
         StMCC = double(readNPY('channel_states.npy'));
         StMCC = StMCC(tempbool);
         
+%         eventsMCC = eventsMCC(StMCC == 1 | StMCC == -1);
+%         StMCC = StMCC(StMCC == 1 | StMCC == -1);
+        
         
     elseif contains(fnames{ii},'Neuropix')
         
@@ -73,10 +76,14 @@ for ii = 1:length(fnames)
         cd([EventsDir,'\',fnames{ii},'\',tempF{end}])
         
         tempeve = double(readNPY('timestamps.npy'));
+        %tempeve = [tempeve(1:956);tempeve(959:end)];
+
         tempbool = tempeve>1;  
         eventsNPX = [eventsNPX,tempeve(tempbool)];
                 
         tempst = double(readNPY('channel_states.npy'));
+        %tempst = [tempst(1:956);tempst(959:end)];
+        
         StNPX = [StNPX,tempst(tempbool)];
         Banks = Banks +1;
         
@@ -98,6 +105,25 @@ MCCData = [MCCData.Data(10,:);MCCData.Data(11,:);... %Resp;PID
 %lick left channel 16
 
 
+%correcting additional trials when optotagging and olfactometer is still
+%running. For this to work you must delete the extra trials manually from
+%the olfactometer txt file.
+% 
+idx = find(StMCC == 1);
+idx = idx(1:size(OlfacMat,1));
+tempeve = eventsMCC(idx(end)+1:end,:);
+tempSt = StMCC(idx(end)+1:end,:);
+
+tempeve = tempeve(tempSt ~= -1 & tempSt ~= 1);
+tempSt = tempSt(tempSt ~= -1 & tempSt ~= 1);
+
+eventsMCC = [eventsMCC(1:idx(end),:);tempeve];
+StMCC = [StMCC(1:idx(end),:);tempSt];
+
+% % % eventsMCC = eventsMCC(1:idx(end),:);
+% % % StMCC = StMCC(1:idx(end),:);
+%%%%%%%%%%%%%%%%%
+
 
 CeventsMCC = zeros(size(eventsMCC,1),Banks);
 CMCCDataC = cell(1,2);
@@ -107,7 +133,12 @@ for bank = 1:Banks
 %     [tempevents,tempdata] = NPX_SynchStreams(eventsMCC, eventsNPX(:,bank), MCCData);
 %     [tempevents,tempdata] = NPX_SynchStreams(eventsMCC(StMCC==-1 | StMCC==1),...
 %         eventsNPX(StNPX(:,bank)==-1 | StNPX(:,bank)==1,bank), MCCData);
-    [tempevents,tempdata] = NPX_SynchStreams(eventsMCC, eventsNPX(:,bank), StMCC, StNPX(:,bank), MCCData);
+
+    if size(eventsNPX,1) > size(eventsMCC,1)
+        [tempevents,tempdata] = NPX_SynchStreams(eventsMCC, eventsNPX(1:size(eventsMCC,1),bank), StMCC, StNPX(1:size(StMCC,1),bank), MCCData);
+    else
+        [tempevents,tempdata] = NPX_SynchStreams(eventsMCC, eventsNPX(:,bank), StMCC, StNPX(:,bank), MCCData);
+    end
     
     CeventsMCC(:,bank) = tempevents;
     CMCCDataC{bank} = tempdata;

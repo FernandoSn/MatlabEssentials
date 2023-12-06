@@ -13,13 +13,13 @@ ii = 1;
 while (ii+BlockSize)<=size(td,2)
     
     units = ii:(ii+BlockSize);
-    rho = NPX_GetSimMatrix(td(:,units), 'corr');
-    imagesc(rho)
-%     TACorrMat = NPX_GetTrialAveragedVecSimMat(td(:,units),ltd);
-%     imagesc(TACorrMat)
+%     rho = NPX_GetSimMatrix(td(:,units), 'corr');
+%     imagesc(rho)
+    TACorrMat = NPX_GetTrialAveragedVecSimMat(td(:,units),ltd);
+    imagesc(TACorrMat)
     xticks([])
     yticks([])
-    caxis([-0.6,0.6]);
+    caxis([-0.5,0.5]);
     colorbar
     
     frame = getframe(gcf);

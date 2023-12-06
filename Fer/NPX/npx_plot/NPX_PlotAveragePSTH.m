@@ -52,8 +52,8 @@ if isempty(color); color = [0,0,0]; end
 if AddFig == true; figure; end
 
 
-%ylim([0 9])
-%xlim([-1 2])
+%ylim([2 5])
+%xlim([-1 3])
 
 
 if style == 1
@@ -63,12 +63,14 @@ if style == 1
     lineProps.col = {color};
     
     mseb(t,AvPSTH,Err,lineProps);
+    makepretty;
     
 elseif style == 2
     
     hold on
     for ii = 1:size(PSTHMat,1)
         plot(t,PSTHMat(ii,PSTHstruct.realPST));
+        makepretty;
     end
     
 elseif style ==3
@@ -77,7 +79,9 @@ elseif style ==3
     hold on
     for ii = 1:size(PSTHMat,1)
         plot(t,PSTHMat(ii,PSTHstruct.realPST),'color',[color,0.1]);
+        makepretty;
     end
+    
     
     
 end
